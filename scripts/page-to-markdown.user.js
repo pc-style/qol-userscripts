@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         📝 Page to Markdown with Selector
 // @namespace    http://tampermonkey.net/
-// @version      1.0.3
+// @version      1.0.4
 // @description  Convert any page or selected element to Markdown using Readability and Turndown
 // @author       QoL Team
 // @match        *://*/*

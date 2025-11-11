@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🌙 Dark Glassmorphism Theme Enforcer
 // @namespace    http://tampermonkey.net/
-// @version      1.0.3
+// @version      1.0.4
 // @description  Enforces dark glassmorphism theme on any website with customizable blur and transparency
 // @author       QoL Team
 // @match        *://*/*
