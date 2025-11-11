@@ -8,7 +8,7 @@
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_addStyle
-// @require      file:///Users/pcstyle/qol-userscripts/dist/qol-framework.user.js
+// @require      https://cdn.jsdelivr.net/gh/pc-style/qol-userscripts@main/dist/qol-framework.user.js
 // @run-at       document-idle
 // ==/UserScript==
 

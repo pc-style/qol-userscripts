@@ -664,12 +664,20 @@ ${script.description}`,
   // src/core/registry.js
   var scripts = [
     {
-      "id": "example-script",
-      "name": "\u{1F4DD} Example Script",
-      "description": "Demonstrates framework features with a simple page highlighter",
+      "id": "page-to-markdown",
+      "name": "\u{1F4DD} Page to Markdown",
+      "description": "Convert page content to Markdown with element selector",
       "version": "1.0.0",
       "enabled": true,
-      "file": "example-script.user.js"
+      "file": "page-to-markdown.user.js"
+    },
+    {
+      "id": "dark-mode-enforcer",
+      "name": "\u{1F319} Dark Theme Enforcer",
+      "description": "Apply dark glassmorphism theme to any website",
+      "version": "1.0.0",
+      "enabled": true,
+      "file": "dark-mode-enforcer.user.js"
     }
   ];
 
