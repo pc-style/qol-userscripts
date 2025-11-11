@@ -9,7 +9,8 @@
     "check:scripts": "node tools/check-scripts.js",
     "integrate": "node tools/integrate.js",
     "build": "npm run integrate && node tools/build.js",
-    "build:all": "npm run build"
+    "build:all": "npm run build",
+    "purge-cdn": "node tools/purge-cdn.js"
   },
   "keywords": [
     "userscript",
