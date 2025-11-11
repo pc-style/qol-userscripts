@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         QoL Framework
 // @namespace    http://tampermonkey.net/
-// @version      1.0.0
+// @version      1.0.3
 // @description  Unified framework for QoL userscripts with glassmorphic UI
 // @author       QoL Team
 // @match        *://*/*

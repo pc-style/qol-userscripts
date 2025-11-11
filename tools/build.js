@@ -23,6 +23,10 @@ if (!fs.existsSync(distDir)) {
 async function buildFramework() {
   console.log('🔨 Building framework...');
   
+  // Read version from package.json
+  const pkg = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8'));
+  const version = pkg.version;
+  
   try {
     await esbuild.build({
       entryPoints: [path.join(rootDir, 'src/index.js')],
@@ -36,7 +40,7 @@ async function buildFramework() {
         js: `// ==UserScript==
 // @name         QoL Framework
 // @namespace    http://tampermonkey.net/
-// @version      1.0.0
+// @version      ${version}
 // @description  Unified framework for QoL userscripts with glassmorphic UI
 // @author       QoL Team
 // @match        *://*/*
