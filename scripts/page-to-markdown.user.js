@@ -332,8 +332,6 @@ date: ${date}
         this._selectorOutHandler = null;
       }
     },
-      }
-    },
     
     handleSelectorHover(e) {
       if (!this.selectorMode) return;
