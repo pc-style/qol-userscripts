@@ -1,6 +1,6 @@
 {
   "name": "qol-userscripts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Quality of Life userscript framework with glassmorphic UI",
   "main": "src/index.js",
   "type": "module",
