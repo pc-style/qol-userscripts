@@ -598,7 +598,9 @@ ${script.description}`,
     }
   }
   function updateToolbarButton(scriptId, enabled) {
-    const btn = toolbar?.querySelector(`[data-script-id="${scriptId}"]`);
+    if (!toolbar)
+      return;
+    const btn = toolbar.querySelector(`[data-script-id="${scriptId}"]`);
     if (btn) {
       if (enabled) {
         btn.classList.add("active");
