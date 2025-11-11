@@ -69,6 +69,7 @@
     turndownService: null,
     selectorMode: false,
     selectedElement: null,
+    keyboardHandler: null,
     
     init() {
       console.log('[page-to-markdown] Initializing...');
@@ -77,7 +78,7 @@
       this.addConvertButton();
       this.setupKeyboardShortcut();
       
-      QoL.ui.showToast('Page to Markdown ready! Press Ctrl+Shift+M', 'success');
+      QoL.ui.showToast('Page to Markdown ready! Press Ctrl+M', 'success');
     },
     
     destroy() {
@@ -85,6 +86,12 @@
       
       this.removeConvertButton();
       this.disableSelectorMode();
+      
+      // Remove keyboard shortcut listener
+      if (this.keyboardHandler) {
+        document.removeEventListener('keydown', this.keyboardHandler);
+        this.keyboardHandler = null;
+      }
       
       QoL.ui.showToast('Page to Markdown disabled', 'info');
     },
@@ -140,7 +147,7 @@
       // Add floating action button
       const button = QoL.utils.createElement('button', {
         id: 'qol-markdown-convert-btn',
-        title: 'Convert to Markdown (Ctrl+Shift+M)',
+        title: 'Convert to Markdown (Ctrl+M)',
         style: {
           position: 'fixed',
           bottom: '80px',
@@ -179,19 +186,21 @@
     },
     
     setupKeyboardShortcut() {
-      document.addEventListener('keydown', (e) => {
-        // Ctrl+Shift+M
-        if (e.ctrlKey && e.shiftKey && e.key === 'M') {
+      this.keyboardHandler = (e) => {
+        // Ctrl+M
+        if (e.ctrlKey && !e.shiftKey && e.key === 'm') {
           e.preventDefault();
           this.handleConvert();
         }
         
-        // Ctrl+Shift+S for selector mode
-        if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+        // Ctrl+S for selector mode
+        if (e.ctrlKey && !e.shiftKey && e.key === 's') {
           e.preventDefault();
           this.toggleSelectorMode();
         }
-      });
+      };
+      
+      document.addEventListener('keydown', this.keyboardHandler);
     },
     
     async handleConvert() {
@@ -280,8 +289,6 @@ date: ${date}
 ---
 
 `;
-    },
-    
     enableSelectorMode() {
       this.selectorMode = true;
       QoL.ui.showToast('Click on an element to convert it to Markdown', 'info', 3000);
@@ -289,12 +296,17 @@ date: ${date}
       // Add visual indicator
       document.body.style.cursor = 'crosshair';
       
+      // Store bound handlers for later removal
+      this._selectorClickHandler = this.handleSelectorClick.bind(this);
+      this._selectorHoverHandler = this.handleSelectorHover.bind(this);
+      this._selectorOutHandler = this.handleSelectorOut.bind(this);
+      
       // Add click listener
-      document.addEventListener('click', this.handleSelectorClick.bind(this), true);
+      document.addEventListener('click', this._selectorClickHandler, true);
       
       // Add hover effect
-      document.addEventListener('mouseover', this.handleSelectorHover.bind(this), true);
-      document.addEventListener('mouseout', this.handleSelectorOut.bind(this), true);
+      document.addEventListener('mouseover', this._selectorHoverHandler, true);
+      document.addEventListener('mouseout', this._selectorOutHandler, true);
     },
     
     disableSelectorMode() {
@@ -304,6 +316,22 @@ date: ${date}
       if (this.selectedElement) {
         this.selectedElement.style.outline = '';
         this.selectedElement = null;
+      }
+      
+      // Remove selector mode listeners if they exist
+      if (this._selectorClickHandler) {
+        document.removeEventListener('click', this._selectorClickHandler, true);
+        this._selectorClickHandler = null;
+      }
+      if (this._selectorHoverHandler) {
+        document.removeEventListener('mouseover', this._selectorHoverHandler, true);
+        this._selectorHoverHandler = null;
+      }
+      if (this._selectorOutHandler) {
+        document.removeEventListener('mouseout', this._selectorOutHandler, true);
+        this._selectorOutHandler = null;
+      }
+    },
       }
     },
     
